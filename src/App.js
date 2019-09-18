@@ -52,11 +52,22 @@ export default class App extends React.Component {
         this.setState({ todos: [...this.state.todos, newTodo] })
     }
 
+    updateItem = (item, id) => {
+        this.setState({
+            todos: this.state.todos.map(todo => {
+                if (todo.id == id) {
+                    todo.title = item;
+                }
+                return todo;
+            })
+        })
+    }
+
     render() {
         return (
             <div className="app">
                 <Form addItem={this.addItem} />
-                <Todos todos={this.state.todos} markComplete={this.markComplete} deleteItem={this.deleteItem} />
+                <Todos todos={this.state.todos} markComplete={this.markComplete} deleteItem={this.deleteItem} editItem={this.editItem} updateItem={this.updateItem} />
             </div>
         )
     }
